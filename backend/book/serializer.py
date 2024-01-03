@@ -1,7 +1,8 @@
 from rest_framework import serializers
-from .models import BookReview, Genre
+from .models import BookReview
 
 
+        
 class BookReviewSerializer(serializers.ModelSerializer):
     user_name = serializers.CharField(source='creator.username', read_only=True)
     genre_name = serializers.CharField(source='genre.genre', read_only=True)
