@@ -1,6 +1,6 @@
 import React from 'react'
 import {useQuery} from 'react-query'
-import { getData, timeAgo } from '../helper/helper'
+import { getData, timeAgo } from '../utils/helper'
 
 const BookFeed = () => {
     const {isLoading, data} = useQuery({
@@ -9,10 +9,11 @@ const BookFeed = () => {
       onSuccess: () => console.log(data)
   })
 
+
   return (
     <div className='mt-20 grid gap-8 grid-cols-2 text-stone-500 font-medium'>
         {data?.map(review => (
-          <div className='border p-10 shadow-md'>
+          <div className='border p-10 shadow-md' key={review.id}>
             <div className='flex justify-between items-center'>
               <div className='flex gap-4 items-center '>
                 <p className='text-indigo-400 text-lg '>@{review.username}</p>
