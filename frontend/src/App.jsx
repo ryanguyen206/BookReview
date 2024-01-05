@@ -3,6 +3,7 @@ import Navbar from './components/Navbar'
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
 import CreateReviewPage from './pages/CreateReviewPage'
+import RegisterPage from './pages/RegisterPage'
 import {
   Routes,
   Route,
@@ -21,6 +22,7 @@ function App() {
             <Route path="/create" element={<CreateReviewPage />} />
           </Route>
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
         </Routes>
 
     </div>
