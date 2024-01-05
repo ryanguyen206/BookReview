@@ -6,10 +6,9 @@ import AuthContext from '../context/AuthContext';
 const Navbar = () => {
 
     
-    
+    let {user, logoutUser} = useContext(AuthContext)
     return (
         <div className='py-10 text-lg'>
-            <p>Hello</p>
             <ul className='flex justify-between text-stone-700 font-medium'>
                 <div className='flex items-center'> 
                     <RiBook2Fill/>
@@ -17,8 +16,8 @@ const Navbar = () => {
                 </div>
                 <div className='flex'>
                     <li className='pr-6'>About</li>
-                    <li className='pr-6'>Contact</li>
-                    <li><Link to='/login'>Login</Link></li>
+                    <li className='pr-6'><Link to ='/create'>Create</Link></li>
+                    {user ? <li onClick={logoutUser}>Logout</li> :<li><Link to='/login'>Login</Link></li>}
                 </div>
             
             </ul>

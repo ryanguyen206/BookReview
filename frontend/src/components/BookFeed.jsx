@@ -1,6 +1,7 @@
 import React from 'react'
 import {useQuery} from 'react-query'
-import { getData, timeAgo } from '../utils/helper'
+import { getData } from '../utils/helper'
+import SingleBookFeed from './SingleBookFeed'
 
 const BookFeed = () => {
     const {isLoading, data} = useQuery({
@@ -11,24 +12,9 @@ const BookFeed = () => {
 
 
   return (
-    <div className='mt-20 grid gap-8 grid-cols-2 text-stone-500 font-medium'>
+    <div className='mt-20 grid gap-8 grid-cols-2 grid-rows-2 text-stone-500 font-medium'>
         {data?.map(review => (
-          <div className='border p-10 shadow-md' key={review.id}>
-            <div className='flex justify-between items-center'>
-              <div className='flex gap-4 items-center '>
-                <p className='text-indigo-400 text-lg '>@{review.username}</p>
-                <p className='border px-2 rounded-xl bg-stone-400 text-white '>{review.genre_name}</p>
-              </div>
-              <small>{timeAgo(review.created)}</small>
-            </div>
-     
-            <p className='uppercase mt-4 text-2xl font-semibold '>{review.book_title}</p>
-            <small className='text-base'>{review.review_title}</small>
-            <p className='mt-10'>{review.body.slice(0, 100)}...</p>
-
-            <button className='mt-10 bg-indigo-400 text-white border p-2 px-4 rounded-xl hover:bg-indigo-500 shadow-lg'>Join this review</button>
-          
-          </div>
+            <SingleBookFeed key={review.id} review={review}/>
         ))}
     </div>
   )

@@ -1,8 +1,13 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import LoginForm from '../components/Forms/Login'
+
 
 const LoginPage = () => {
   return (
-    <div>LoginPage</div>
+    <div>
+      <LoginForm/>
+
+    </div>
   )
 }
 
