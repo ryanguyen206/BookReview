@@ -16,12 +16,19 @@ class BookReviewSerializer(serializers.ModelSerializer):
             'genre',
             'genre_name',
             'username',
-            'participants',
             'book_title',
             'review_title',
             'body',
             'created'
         ]
+        read_only = ['participants']
+        
+        
+class GenreSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Genre
+        fields = ['genre', 'id', 'pk']
+        
         
         
  
