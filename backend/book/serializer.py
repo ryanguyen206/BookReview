@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import BookReview, Genre
+from .models import BookReview, Genre, Message
 
 
 
@@ -30,5 +30,10 @@ class GenreSerializer(serializers.ModelSerializer):
         fields = ['genre', 'id', 'pk']
         
         
+class MessageSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(source='user.username', read_only=True)
+    class Meta:
+        model = Message
+        fields = ['id', 'body', 'username']
         
  

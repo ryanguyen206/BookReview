@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics
-from .models import BookReview, Genre
-from .serializer import BookReviewSerializer, GenreSerializer
+from .models import BookReview, Genre, Message
+from .serializer import BookReviewSerializer, GenreSerializer, MessageSerializer
 from rest_framework.response import Response
 
 #Book
@@ -40,4 +40,17 @@ class GenreListAPIView(generics.ListAPIView):
         genre_names = [item['genre'] for item in data]
 
         return Response(genre_names)
+    
+# Message
+
+class MessageListAPIView(generics.ListAPIView):
+    serializer_class = MessageSerializer
+    
+    def get_queryset(self):
+        book_review_id = self.kwargs.get('pk')
+        queryset = Message.objects.filter(book_review_id=book_review_id)
+        
+        return queryset
+    
+    
     
