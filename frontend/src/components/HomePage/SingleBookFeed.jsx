@@ -31,13 +31,13 @@ const SingleBookFeed = ({review}) => {
     }
 
   return (
-        <div className='border p-10 shadow-md' key={review.id}>
-            <div className='flex justify-between items-center'>
-              <div className='flex gap-4 items-center '>
+        <div className='border p-10 shadow-md flex flex-col justify-between' key={review.id}>
+            <div className='flex justify-between'>
+              <div className='lg:flex lg:gap-4 lg:items-center '>
                 <p className='text-indigo-400 text-lg '>@{review?.username}</p>
-                <p className='border px-2 rounded-xl bg-stone-400 text-white '>{review?.genre_name}</p>
+                <p className='border inline-block px-2 rounded-xl mt-2 md:mt-4 lg:mt-0 bg-stone-400 text-white '>{review?.genre_name}</p>
               </div>
-              <small>{timeAgo(review.created)}</small>
+              <small className='mt-1'>{timeAgo(review.created)}</small>
             </div>
      
             <p className='uppercase mt-4 text-2xl font-semibold '>{review?.book_title}</p>
