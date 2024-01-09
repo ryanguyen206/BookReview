@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom'
 
 const SingleBookFeed = ({review}) => {
 
-    let {user} = useContext(AuthContext)
+    let {user, authTokens} = useContext(AuthContext)
 
     const queryClient = useQueryClient()
 
@@ -24,6 +24,9 @@ const SingleBookFeed = ({review}) => {
     const handleDelete = async (id) => {
         const res = await fetch(`http://127.0.0.1:8000/api/book-review/${id}/delete/`, {
             method:'DELETE',
+            headers: {
+              'Authorization': `Bearer ${authTokens.access}`
+            }
         })  
     }
 

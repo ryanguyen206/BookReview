@@ -1,27 +1,38 @@
 import React from 'react'
 import hero from '../../assets/hero.jpg'
+import { useQuery } from 'react-query'
+import { handleGetRequest } from '../../utils/helper'
+
+
 
 const Hero = () => {
+
+    const {data} = useQuery({
+        queryKey:['reviews'], 
+        queryFn: async () => await handleGetRequest('http://127.0.0.1:8000/api/book-review/'),
+    })
+
+    
   return (
-    <div className='text-indigo-500 mt-28'>
-        <h1 className='text-6xl leading-tight '>Discover, Review, Discuss  <br/> <span className='text-indigo-300'> Your Literary Haven</span> </h1>
+    <div className='mt-20 text-indigo-500 md:mt-28'>
+        <h1 className='text-center text-3xl md:text-5xl md:leading-tight  '>Discover, Review, Discuss  <br/> <span className='text-indigo-300'> Your Literary Haven</span> </h1>
         <h2></h2>
         <div className='mt-10'>   
            <img src={hero} className='h-64 w-full object-cover'/> 
         </div>
-        <div className='mt-10 flex justify-between'>
-            <div className='flex gap-10'>
-                    <div className=''>
-                        <p className='text-4xl font-semibold  mb-4'>300+</p>
-                        <h2 className='text-xl '>Reviews Completed</h2>
+        <div className='text-center'>
+            <div className='grid justify-center mt-20 md:flex md:justify-center md:gap-20'>
+                    <div className='flex items-center gap-4 mb-6 md:mb-0 md:block'>
+                        {data && <p className='text-4xl font-semibold'>{data.length}+</p>}
+                        <h2 className='text-xl '>Reviews</h2>
                     </div>
-                    <div>
-                        <p className='text-4xl font-semibold mb-4'>200+</p>
-                        <h2 className='text-xl '>Unique users</h2>
+                    <div className='flex items-center gap-4 md:block '>
+                        <p className='text-4xl font-semibold'>20+</p>
+                        <h2 className='text-xl '> Users</h2>
                     </div>
            
             </div>
-            <div className='w-1/2 text-xl'>
+            <div className='mt-10 text-xl text-center w-full mx-auto md:w-1/2 lg:w-1/3 md:text-2xl '>
                 Embark on a literary journey. Engage in passionate book discussions, share reviews, and connect with readers!
             </div>
         </div>

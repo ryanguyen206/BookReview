@@ -11,7 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const CreateReviewForm = () => {
 
-    let {user} = useContext(AuthContext)
+    let {user, authTokens} = useContext(AuthContext)
     let {genres} = useGenre()
     const queryClient = useQueryClient();
 
@@ -35,6 +35,7 @@ const CreateReviewForm = () => {
           method:'POST',
           headers: {
             'Content-Type':'application/json',
+            'Authorization': `Bearer ${authTokens.access}`,
           },
           body: JSON.stringify({
             creator:user.user_id,
@@ -44,7 +45,6 @@ const CreateReviewForm = () => {
             body: inputValues.body
           })
         })
-        console.log(res)
         if (res.status === 201) {
           resetForm()
           toast.success('Review Created');

@@ -77,24 +77,6 @@ export const AuthProvider = ({children}) => {
         logoutUser:logoutUser,
     }
 
-
-//     useEffect(() => {
-//     const logoutAfterInterval = () => {
-//         // Clear authentication tokens and redirect to login page
-//         setAuthTokens(null);
-//         setUser(null);
-//         localStorage.removeItem('authTokens');
-//         navigate('/login');
-//     };
-
-//     // Set interval to log out the user every 10 seconds
-//     const logoutInterval = setInterval(logoutAfterInterval, 10000);
-
-//     // Clear the interval when the component is unmounted
-//     return () => clearInterval(logoutInterval);
-// }, []);
-
-
     useEffect(()=> {
 
         if(loading){
@@ -106,10 +88,7 @@ export const AuthProvider = ({children}) => {
         let interval =  setInterval(()=> {
             if(authTokens){
                 updateToken()
-                console.log('updated')
             }
-
-            console.log('being called')
         }, fourMinutes)
         return ()=> clearInterval(interval)
 

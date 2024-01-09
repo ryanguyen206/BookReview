@@ -1,36 +1,38 @@
 import React from 'react'
 import { useQuery } from 'react-query'
-import { getData } from '../../utils/helper';
+import { handleGetRequest, timeAgo } from '../../utils/helper';
+import Comment from './Comment';
 
 const SingleReviewFeed = ({id}) => {
 
-
     const url =  `http://127.0.0.1:8000/api/book-review/${id}/messages/`
 
-    const {data} = useQuery({
+    const {data : comments} = useQuery({
         queryKey: ['messages', id],
-        queryFn: () => getData(url),
-        onSuccess: () => console.log(data)
+        queryFn: () => handleGetRequest(url),
+        onSuccess: () => console.log(comments)
     })
 
     return (
-        <>
-        
-            { data && data?.length > 0 ? 
-                <div>
-                    {data.map(message => (
-                        <div key={message.id}>
-                            <p className='text-indigo-400'>@{message?.username} says:</p>
-                            <p>{message.body}</p>
+        <div className='p-5 md:p-10'>
+            <Comment id={id} comments={comments}/>
+            { comments && comments?.length > 0 && 
+                <div className='b'>
+                    {comments.map(message => (
+                        <div key={message.id} className='p-10 my-7 bg-gray-100 text-black'>
+                            <div className='flex justify-between'>
+                                <p className='text-indigo-400'>@{message?.username} says:</p>
+                                <small>{timeAgo(message.created)}</small>                            
+                            </div>
+                     
+                            <p className='mt-2 tracking-tighter'>{message.body}</p>
                         </div>
                   
                     ))}
-                </div>
-                :
-                <p>Currently no replies</p>
-            
+               
+                </div>       
             }
-        </>
+        </div>
     
     )
 }

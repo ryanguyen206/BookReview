@@ -3,6 +3,7 @@ import ReusableForm from './ReusableForm';
 import useInputChange from '../../hooks/useInputChange';
 import useToastNotifications from '../../hooks/useToastNotifications';
 import AuthContext from '../../context/AuthContext';
+import { loginRegisterFormLabels } from '../../utils/formFields';
 
 
 const RegisterForm = () => {
@@ -14,13 +15,6 @@ const RegisterForm = () => {
     username: '',
     password: '',
   });
-
-  const formFields = [
-    { name: 'username', label: 'Username', type: 'text', required: true },
-    { name: 'password', label: 'Password', type: 'password', required: true },
-  ];
-
-
 
   let registerUser = async (e)=> {
         e.preventDefault()
@@ -62,7 +56,7 @@ const RegisterForm = () => {
               formState={inputValues}
               handleChange={handleInputChange}
               handleSubmit={registerUser}
-              formFields={formFields}
+              formFields={loginRegisterFormLabels}
               buttonText={'Register'}
             />
           </div>

@@ -3,6 +3,7 @@ import AuthContext from '../../context/AuthContext'
 import ReusableForm from './ReusableForm';
 import useInputChange from '../../hooks/useInputChange';
 import { Link } from 'react-router-dom';
+import { loginRegisterFormLabels } from '../../utils/formFields';
 
 
 
@@ -14,11 +15,6 @@ const LoginForm = () => {
     username: '',
     password: '',
   });
-
-  const formFields = [
-    { name: 'username', label: 'Username', type: 'text', required: true },
-    { name: 'password', label: 'Password', type: 'password', required: true },
-  ];
 
   return (
     <>
@@ -32,7 +28,7 @@ const LoginForm = () => {
               formState={inputValues}
               handleChange={handleInputChange}
               handleSubmit={loginUser}
-              formFields={formFields}
+              formFields={loginRegisterFormLabels}
               buttonText={'Sign In'}
             />
           </div>
