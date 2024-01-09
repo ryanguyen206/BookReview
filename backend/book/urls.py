@@ -9,6 +9,7 @@ urlpatterns = [
     
     path('genre/', views.GenreListAPIView.as_view(), name='genre'),
     
-    path('book-review/<int:pk>/messages/', views.MessageListAPIView.as_view(), name='message-list'),
+    path('book-review/<int:pk>/messages/', views.MessageListOrCreateAPIView.as_view(), name='message-list'),
+ 
 
 ]
