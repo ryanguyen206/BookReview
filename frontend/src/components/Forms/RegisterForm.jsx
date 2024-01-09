@@ -1,17 +1,16 @@
 import React, {useContext} from 'react';
-import AuthContext from '../../context/AuthContext'
 import ReusableForm from './ReusableForm';
 import useInputChange from '../../hooks/useInputChange';
-import { Link } from 'react-router-dom';
-
+import useToastNotifications from '../../hooks/useToastNotifications';
+import AuthContext from '../../context/AuthContext';
 
 
 const RegisterForm = () => {
 
-  let {loginUser} = useContext(AuthContext)
-  
 
-  const { inputValues, handleInputChange} = useInputChange({
+    let {loginUser} = useContext(AuthContext)
+
+  const { inputValues, handleInputChange, resetForm} = useInputChange({
     username: '',
     password: '',
   });
@@ -20,6 +19,36 @@ const RegisterForm = () => {
     { name: 'username', label: 'Username', type: 'text', required: true },
     { name: 'password', label: 'Password', type: 'password', required: true },
   ];
+
+
+
+  let registerUser = async (e)=> {
+        e.preventDefault()
+        if (e.target.username.value.length < 6 || e.target.password.value.length < 6)
+        {
+              useToastNotifications('Username and password length must be greater than six', 'error');
+              return;
+        }
+        let response = await fetch('http://127.0.0.1:8000/api/token/register/', {
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({'username':e.target.username.value, 'password':e.target.password.value})
+        })
+
+        let data = await response.json()
+
+        if (response.status === 201) {
+          useToastNotifications('User successfully created', 'success');
+          resetForm()
+          loginUser(e)
+        } else if (data.username) {
+          useToastNotifications(data.username[0], 'error')
+        }
+
+    
+}
 
   return (
     <>
@@ -32,9 +61,9 @@ const RegisterForm = () => {
             <ReusableForm
               formState={inputValues}
               handleChange={handleInputChange}
-              handleSubmit={loginUser}
+              handleSubmit={registerUser}
               formFields={formFields}
-              buttonText={'Sign In'}
+              buttonText={'Register'}
             />
           </div>
     

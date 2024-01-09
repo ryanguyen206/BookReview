@@ -1,15 +1,29 @@
 import React from 'react'
-import Genre from '../components/Genre'
-import BookFeed from '../components/BookFeed'
-import Hero from '../components/Hero'
-import CreateReviewForm from '../components/Forms/CreateReviewForm'
+import Genre from '../components/HomePage/Genre'
+import BookFeed from '../components/HomePage/BookFeed'
+import Hero from '../components/HomePage/Hero'
+import { useState, useEffect } from 'react'
+
 
 const HomePage = () => {
+
+  const [currentGenre, setCurrentGenre] = useState(null)
+  useEffect(() => {
+    console.log(currentGenre)
+  
+  }, [currentGenre])
+  
   return (
     <div>
         <Hero/>
-        <Genre/>
-        <BookFeed/>
+        <Genre
+          currentGenre={currentGenre}
+          setCurrentGenre={setCurrentGenre}
+        />
+        <BookFeed
+          currentGenre={currentGenre}
+          setCurrentGenre={setCurrentGenre}
+        />
     </div>
   )
 }

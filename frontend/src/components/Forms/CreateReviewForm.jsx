@@ -5,7 +5,7 @@ import useGenre from '../../hooks/useGenre'
 import { useMutation, useQueryClient } from 'react-query';
 import useInputChange from '../../hooks/useInputChange';
 import ReusableForm from './ReusableForm';
-import { ToastContainer, toast } from 'react-toastify';
+import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -47,16 +47,7 @@ const CreateReviewForm = () => {
         console.log(res)
         if (res.status === 201) {
           resetForm()
-          toast.success('Review Created', {
-            position: "top-center",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            });
+          toast.success('Review Created');
         }
     }
 
@@ -83,6 +74,7 @@ const CreateReviewForm = () => {
              handleSubmit={(e) => mutation.mutate(e)}
              formFields={formFields}
              buttonText={'Create Review'}
+             mutation = {mutation}
         />
       </div>
     </div>

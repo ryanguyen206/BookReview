@@ -1,9 +1,10 @@
 import React from 'react'
-import { timeAgo } from '../utils/helper'
+import { timeAgo } from '../../utils/helper'
 import { useContext } from 'react'
-import AuthContext from '../context/AuthContext'
+import AuthContext from '../../context/AuthContext'
 import { useMutation } from 'react-query'
 import { useQueryClient } from 'react-query'
+import { Link } from 'react-router-dom'
 
 
 const SingleBookFeed = ({review}) => {
@@ -30,19 +31,19 @@ const SingleBookFeed = ({review}) => {
         <div className='border p-10 shadow-md' key={review.id}>
             <div className='flex justify-between items-center'>
               <div className='flex gap-4 items-center '>
-                <p className='text-indigo-400 text-lg '>@{review.username}</p>
-                <p className='border px-2 rounded-xl bg-stone-400 text-white '>{review.genre_name}</p>
+                <p className='text-indigo-400 text-lg '>@{review?.username}</p>
+                <p className='border px-2 rounded-xl bg-stone-400 text-white '>{review?.genre_name}</p>
               </div>
               <small>{timeAgo(review.created)}</small>
             </div>
      
-            <p className='uppercase mt-4 text-2xl font-semibold '>{review.book_title}</p>
-            <small className='text-base'>{review.review_title}</small>
-            <p className='mt-10'>{review.body.slice(0, 100)}...</p>
+            <p className='uppercase mt-4 text-2xl font-semibold '>{review?.book_title}</p>
+            <small className='text-base'>{review?.review_title}</small>
+            <p className='mt-10'>{review?.body.slice(0, 100)}...</p>
             
             <div className='flex justify-between'>
-                <button className='mt-10 bg-indigo-400 text-white border p-2 px-4 rounded-xl hover:bg-indigo-500 shadow-lg'>Join this review</button>
-                {user.user_id === review.creator ? 
+                <button className='mt-10 bg-indigo-400 text-white border p-2 px-4 rounded-xl hover:bg-indigo-500 shadow-lg'><Link to={`/review/${review.id}`}>Join this review</Link></button>
+                {user.user_id === review?.creator ? 
                 <button className='mt-10 bg-red-400 text-white border p-2 px-4 rounded-xl hover:bg-red-500 shadow-lg' onClick={() => mutatation.mutate(review.id)}>Delete</button> 
                 : null}
             </div>

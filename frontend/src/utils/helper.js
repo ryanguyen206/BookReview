@@ -4,6 +4,26 @@ export const getData = async (link) => {
     return data
 }
 
+export const getBookData = async () => {
+  const options = {
+    method: 'GET',
+    url: 'https://hapi-books.p.rapidapi.com/search/hunger%20games',
+    headers: {
+      'X-RapidAPI-Key': process.env.REACT_APP_RAPID_KEY,
+      'X-RapidAPI-Host': process.env.REACT_APP_RAPID_HOST
+    }
+  };
+
+  try {
+    const response = await axios.request(options);
+    console.log(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+
+  
+}
+
 
 export const timeAgo = (timestamp) => {
     const current_time = new Date();

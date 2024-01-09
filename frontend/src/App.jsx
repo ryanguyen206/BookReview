@@ -10,6 +10,7 @@ import {
   Link,
 } from "react-router-dom";
 import PrivateRoute from './utils/privateRoute'
+import ReviewPage from './pages/ReviewPage'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           </Route>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/review/:id" element={<ReviewPage />} />
         </Routes>
 
     </div>
